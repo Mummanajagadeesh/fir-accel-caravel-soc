@@ -1,6 +1,6 @@
 ###############################################################################
 # Created by write_sdc
-# Wed Jul 19 15:42:08 2023
+# Thu Mar 19 18:54:25 2026
 ###############################################################################
 current_design user_project_wrapper
 ###############################################################################
@@ -1007,35 +1007,6 @@ set_multicycle_path -setup\
 # Environment
 ###############################################################################
 set_load -pin_load 0.1900 [get_ports {wbs_ack_o}]
-set_load -pin_load 0.1900 [get_ports {analog_io[28]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[27]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[26]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[25]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[24]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[23]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[22]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[21]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[20]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[19]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[18]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[17]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[16]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[15]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[14]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[13]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[12]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[11]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[10]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[9]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[8]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[7]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[6]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[5]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[4]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[3]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[2]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[1]}]
-set_load -pin_load 0.1900 [get_ports {analog_io[0]}]
 set_load -pin_load 0.1900 [get_ports {io_oeb[37]}]
 set_load -pin_load 0.1900 [get_ports {io_oeb[36]}]
 set_load -pin_load 0.1900 [get_ports {io_oeb[35]}]
@@ -2011,4 +1982,4 @@ set_timing_derate -late 1.0500
 # Design Rules
 ###############################################################################
 set_max_transition 1.5000 [current_design]
-set_max_fanout 10.0000 [current_design]
+set_max_fanout 16.0000 [current_design]

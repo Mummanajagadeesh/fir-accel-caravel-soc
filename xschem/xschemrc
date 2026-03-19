@@ -1,0 +1,6 @@
+set PDKPATH "(PDK_ROOT)/sky130A"
+set PDK_ROOT "(PDK_ROOT)"
+set PDK "sky130A"
+
+append XSCHEM_LIBRARY_PATH ":(PDK_ROOT)/sky130A/libs.tech/xschem"
+append XSCHEM_LIBRARY_PATH ":../xschem"
