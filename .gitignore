@@ -21,3 +21,8 @@ spef/
 *.spef
 *.lib
 openlane/*/runs/
+mag/
+maglef/
+def/
+spi/
+verilog/gl/
