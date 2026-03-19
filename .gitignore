@@ -16,3 +16,8 @@ spef/
 *.spef
 *.lib
 openlane/*/runs/
+gds/*.gds
+spef/
+*.spef
+*.lib
+openlane/*/runs/
