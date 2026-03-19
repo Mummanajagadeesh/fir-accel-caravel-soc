@@ -35,7 +35,6 @@ module user_project_wrapper #(
     wire [15:0] coeff_data;
     wire        coeff_wr;
     wire [7:0]  pwm_direct;
-    wire        gpio_bit_in;
     wire        lfsr_bit;
     wire        bit_in;
     wire        cic_valid;
@@ -45,26 +44,16 @@ module user_project_wrapper #(
     wire        pwm_out;
     wire        rst_n = ~(wb_rst_i | soft_rst);
 
-    // Bitstream source mux: LFSR (test) or GPIO (real analog input)
-    assign gpio_bit_in = io_in[8];
-    assign bit_in      = use_lfsr ? lfsr_bit : gpio_bit_in;
+    assign bit_in = use_lfsr ? lfsr_bit : io_in[8];
 
-    // GPIO
-    assign io_out[9]  = pwm_out;
+    // --- GPIO assignments (flat, no generate) ---
+    // io_out: only [9] is driven, rest tied 0
+    assign io_out  = {{(`MPRJ_IO_PADS-10){1'b0}}, pwm_out, {9{1'b0}}};
+    // io_oeb: [9]=0 (output), rest=1 (input/hi-Z)
+    assign io_oeb  = {{(`MPRJ_IO_PADS-10){1'b1}}, 1'b0, {9{1'b1}}};
+
     assign la_data_out = 128'b0;
     assign user_irq    = 3'b0;
-
-    genvar g;
-    generate
-        for (g = 0; g < `MPRJ_IO_PADS; g = g+1) begin : gpio_assign
-            if (g == 9) begin
-                assign io_oeb[g] = 1'b0;
-            end else begin
-                assign io_out[g] = 1'b0;
-                assign io_oeb[g] = 1'b1;
-            end
-        end
-    endgenerate
 
     // --- Wishbone CSR ---
     wb_csr csr_inst (
@@ -73,7 +62,7 @@ module user_project_wrapper #(
         .wbs_we_i(wbs_we_i),   .wbs_sel_i(wbs_sel_i),
         .wbs_dat_i(wbs_dat_i), .wbs_adr_i(wbs_adr_i),
         .wbs_ack_o(wbs_ack_o), .wbs_dat_o(wbs_dat_o),
-        .enable(enable),       .bypass_fir(bypass_fir),
+        .enable(enable),        .bypass_fir(bypass_fir),
         .bypass_cic(bypass_cic),.soft_rst(soft_rst),
         .use_lfsr(use_lfsr),   .osr(osr),
         .coeff_addr(coeff_addr),.coeff_data(coeff_data),
@@ -81,7 +70,7 @@ module user_project_wrapper #(
         .data_valid(fir_valid), .overflow(1'b0)
     );
 
-    // --- LFSR (test bitstream source) ---
+    // --- LFSR ---
     lfsr lfsr_inst (
         .clk(wb_clk_i), .rst_n(rst_n),
         .enable(use_lfsr), .bit_out(lfsr_bit)
@@ -100,7 +89,7 @@ module user_project_wrapper #(
         .data_in   (bypass_cic ? {bit_in, 15'b0} : cic_out),
         .data_valid(bypass_cic ? enable : (cic_valid & enable)),
         .data_out(fir_out),   .out_valid(fir_valid),
-        .coeff_addr(coeff_addr), .coeff_data(coeff_data),
+        .coeff_addr(coeff_addr),.coeff_data(coeff_data),
         .coeff_wr(coeff_wr)
     );
 
