@@ -11,4 +11,8 @@
 /caravel
 /dependencies
 /mgmt_core_wrapper
-/logs
+/logsgds/*.gds
+spef/
+*.spef
+*.lib
+openlane/*/runs/
