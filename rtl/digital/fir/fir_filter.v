@@ -17,48 +17,49 @@ module fir_filter #(
 
     reg signed [WIDTH-1:0]     coeffs [0:N_TAPS-1];
     reg signed [WIDTH-1:0]     delay  [0:N_TAPS-1];
-    reg signed [ACC_WIDTH-1:0] mac_comb;  // combinational MAC result
+    reg signed [ACC_WIDTH-1:0] mac_comb;
 
-    integer j, k;
+    integer j;
 
-    // Purely combinational MAC — blocking assignments only, no clk
+    // Combinational MAC
     always @(*) begin : mac_block
         reg signed [ACC_WIDTH-1:0] acc;
+        integer k;
         acc = 0;
-        for (j = 0; j < N_TAPS; j = j+1)
-            acc = acc + delay[j] * coeffs[j];
+        for (k = 0; k < N_TAPS; k = k+1)
+            acc = acc + delay[k] * coeffs[k];
         mac_comb = acc;
     end
 
-    // Coefficient write
-    always @(posedge clk) begin
-        if (coeff_wr)
+    // Coefficient write + reset to passthrough (h[0]=1.0, rest=0)
+    always @(posedge clk or negedge rst_n) begin : coeff_block
+        integer m;
+        if (!rst_n) begin
+            for (m = 0; m < N_TAPS; m = m+1)
+                coeffs[m] <= 0;
+            coeffs[0] <= 16'h7FFF;  // 1.0 in Q1.15 — passthrough default
+        end else if (coeff_wr) begin
             coeffs[coeff_addr] <= coeff_data;
+        end
     end
 
-    // Sequential: shift register + latch MAC result
-    always @(posedge clk or negedge rst_n) begin
+    // Delay line + output register
+    always @(posedge clk or negedge rst_n) begin : filter_block
+        integer n;
         if (!rst_n) begin
-            for (j = 0; j < N_TAPS; j = j+1)
-                delay[j] <= 0;
+            for (n = 0; n < N_TAPS; n = n+1)
+                delay[n] <= 0;
             data_out  <= 0;
             out_valid <= 0;
         end else if (data_valid) begin
             delay[0] <= data_in;
-            for (j = 1; j < N_TAPS; j = j+1)
-                delay[j] <= delay[j-1];
-            // mac_comb uses OLD delay values (before shift) — correct for FIR
+            for (n = 1; n < N_TAPS; n = n+1)
+                delay[n] <= delay[n-1];
             data_out  <= mac_comb[WIDTH+14:15];
             out_valid <= 1;
         end else begin
             out_valid <= 0;
         end
-    end
-
-    initial begin
-        for (k = 0; k < N_TAPS; k = k+1)
-            coeffs[k] = 0;
-        coeffs[0] = 16'h7FFF;
     end
 
 endmodule
