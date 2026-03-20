@@ -1,12 +1,17 @@
-# SPDX-FileCopyrightText: 2020 Efabless Corporation
+# SPDX-FileCopyrightText: 2026 Mummana Jagadeesh
 # SPDX-License-Identifier: Apache-2.0
-
-CARAVEL_ROOT: /home/jagadeesh97/caravel_user_project/caravel
-MCW_ROOT: /home/jagadeesh97/caravel_user_project/mgmt_core_wrapper
+CARAVEL_ROOT: $GITHUB_WORKSPACE/caravel
+MCW_ROOT: $GITHUB_WORKSPACE/mgmt_core_wrapper
 PDK: sky130A
-PDK_ROOT: /home/jagadeesh97/pdks
-USER_PROJECT_ROOT: /home/jagadeesh97/caravel_user_project
+PDK_ROOT: $GITHUB_WORKSPACE/pdk
+USER_PROJECT_ROOT: $GITHUB_WORKSPACE
 caravan: false
 clk: 25
 emailto:
 - null
+extra_design_files:
+- $GITHUB_WORKSPACE/rtl/digital/wishbone_csr/wb_csr.v
+- $GITHUB_WORKSPACE/rtl/digital/cic/cic_decimator.v
+- $GITHUB_WORKSPACE/rtl/digital/fir/fir_filter.v
+- $GITHUB_WORKSPACE/rtl/digital/pwm_dac/pwm_dac.v
+- $GITHUB_WORKSPACE/rtl/digital/lfsr/lfsr.v
