@@ -201,7 +201,7 @@ LFSR ---------+          |             |        |
 
 | Block | File | Description |
 |---|---|---|
-| `wb_csr` | `rtl/digital/wishbone_csr/wb_csr.v` | Wishbone B4 slave CSR. Decodes address offsets, drives all control signals, captures status. Single-cycle ACK. |
+| `wb_csr` | `rtl/digital/wishbone_csr/wb_csr.v` | Wishbone B4 peripheral CSR. Decodes address offsets, drives all control signals, captures status. Single-cycle ACK. |
 | `cic_decimator` | `rtl/digital/cic/cic_decimator.v` | 3-stage CIC filter. Integrators run at full clock rate. Comb sections triggered by decimation pulse at `clk / OSR`. 16-bit internal word width. |
 | `fir_filter` | `rtl/digital/fir/fir_filter.v` | 8-tap direct-form I FIR. Combinational MAC with registered output. Q1.15 coefficients. Initialized to identity (passthrough) on reset. Runtime-loadable via CSR. |
 | `pwm_dac` | `rtl/digital/pwm_dac/pwm_dac.v` | First-order delta-sigma PWM modulator. 8-bit accumulator, carry-out is the output bit. |

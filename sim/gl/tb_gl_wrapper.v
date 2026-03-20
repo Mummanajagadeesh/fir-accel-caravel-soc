@@ -1,3 +1,9 @@
+// SPDX-FileCopyrightText: 2026 Mummana Jagadeesh
+// SPDX-License-Identifier: Apache-2.0
+
+// SPDX-FileCopyrightText: 2026 Mummana Jagadeesh
+// SPDX-License-Identifier: Apache-2.0
+
 // Gate-Level Simulation Testbench
 // Tests the hardened user_project_wrapper GL netlist
 // Functional GLS (no SDF) - verifies logic correctness post P&R

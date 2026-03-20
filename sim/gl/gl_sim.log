@@ -1,0 +1,35 @@
+VCD info: dumpfile sim/gl/gl_sim.vcd opened for output.
+============================================
+  Gate-Level Simulation: user_project_wrapper
+  Netlist: GL (post place-and-route)
+  PDK: Sky130A sky130_fd_sc_hd
+============================================
+
+[TEST 1] Default register values after reset
+  PASS: CTRL = 0x00000001 (enable=1)
+  PASS: OSR = 0x00000010 (default=16)
+
+[TEST 2] Register write and readback
+  PASS: OSR write/read = 0x00000020
+  PASS: PWM_DATA write/read = 0xaa
+
+[TEST 3] FIR coefficient load
+  PASS: COEFF_ADDR readback = 7
+  INFO: Loaded 8 coefficients (0x1000 = 0.125 in Q1.15)
+
+[TEST 4] GPIO direction (io_oeb)
+  PASS: io_oeb[9] = 0 (output)
+  PASS: io_oeb[10] = 1 (hi-Z)
+
+[TEST 5] LFSR test mode pipeline
+  INFO: STATUS = 0x00000000 after 512 cycles with LFSR enabled
+  INFO: PWM output (GPIO[9]) = 0
+
+[TEST 6] Bypass modes
+  INFO: bypass_fir mode: PWM out = 1
+  INFO: Soft reset applied and cleared
+
+============================================
+  GLS RESULTS: 10 passed, 0 failed
+  STATUS: ALL TESTS PASSED
+============================================

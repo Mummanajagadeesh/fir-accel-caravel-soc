@@ -1,3 +1,9 @@
+// SPDX-FileCopyrightText: 2026 Mummana Jagadeesh
+// SPDX-License-Identifier: Apache-2.0
+
+// SPDX-FileCopyrightText: 2026 Mummana Jagadeesh
+// SPDX-License-Identifier: Apache-2.0
+
 `timescale 1ns/1ps
 
 module tb_pwm_dac;

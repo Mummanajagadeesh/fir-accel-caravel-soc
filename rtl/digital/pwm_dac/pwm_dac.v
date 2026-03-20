@@ -1,3 +1,9 @@
+// SPDX-FileCopyrightText: 2026 Mummana Jagadeesh
+// SPDX-License-Identifier: Apache-2.0
+
+
+// SPDX-License-Identifier: Apache-2.0
+
 // PWM DAC - 8-bit, first-order delta-sigma style
 // Input: 8-bit parallel data from Wishbone CSR
 // Output: 1-bit PWM on GPIO

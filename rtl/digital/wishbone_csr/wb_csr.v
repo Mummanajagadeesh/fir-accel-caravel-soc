@@ -1,3 +1,9 @@
+// SPDX-FileCopyrightText: 2026 Mummana Jagadeesh
+// SPDX-License-Identifier: Apache-2.0
+
+
+// SPDX-License-Identifier: Apache-2.0
+
 // Wishbone CSR Block
 // Register map (32-bit word addresses):
 // 0x00 - CTRL      [0]=enable, [1]=bypass_fir, [2]=bypass_cic,

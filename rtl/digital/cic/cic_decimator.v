@@ -1,3 +1,9 @@
+// SPDX-FileCopyrightText: 2026 Mummana Jagadeesh
+// SPDX-License-Identifier: Apache-2.0
+
+
+// SPDX-License-Identifier: Apache-2.0
+
 module cic_decimator #(
     parameter N_STAGES  = 3,
     parameter WIDTH     = 16,

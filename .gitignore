@@ -29,3 +29,6 @@ sim/gl/gl_sim
 sim/gl/*.vcd
 verilog/gl/user_project_wrapper.v
 verilog/gl/user_project_wrapper.v
+*.vcd
+sim/digital/*_sim
+sim/gl/*_sim

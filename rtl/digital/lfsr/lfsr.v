@@ -1,3 +1,9 @@
+// SPDX-FileCopyrightText: 2026 Mummana Jagadeesh
+// SPDX-License-Identifier: Apache-2.0
+
+
+// SPDX-License-Identifier: Apache-2.0
+
 module lfsr (
     input  wire clk,
     input  wire rst_n,

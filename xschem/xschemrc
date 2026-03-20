@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Mummana Jagadeesh
+# SPDX-License-Identifier: Apache-2.0
+
 set PDKPATH "(PDK_ROOT)/sky130A"
 set PDK_ROOT "(PDK_ROOT)"
 set PDK "sky130A"
