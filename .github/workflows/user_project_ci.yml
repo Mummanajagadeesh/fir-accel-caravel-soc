@@ -175,6 +175,12 @@ jobs:
           sudo chown -R $USER:$USER ${{ env.OPENLANE_ROOT }}
           tar -xf /tmp/openlane.tar -C $OPENLANE_ROOT .
 
+      - name: Setup volare in venv
+        run: |
+          python3 -m venv venv
+          venv/bin/pip install volare
+          venv/bin/volare enable --pdk sky130 --pdk-root $PDK_ROOT 78b7bc32ddb4b6f14f76883c2e2dc5b5de9d1cbc
+
       - name: Harden using Openlane
         run: |
           python3 $GITHUB_WORKSPACE/.github/scripts/get_designs.py --design $GITHUB_WORKSPACE
