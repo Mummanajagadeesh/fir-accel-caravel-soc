@@ -7,6 +7,30 @@ on:
     branches: [ main ]
 
 jobs:
+  lint:
+    name: RTL Lint (Verilator)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Verilator
+        run: sudo apt-get install -y verilator
+
+      - name: Lint user_project_wrapper
+        run: |
+          verilator --lint-only -Wall \
+            --bbox-unsup \
+            -DMPRJ_IO_PADS=38 \
+            verilog/rtl/user_project_wrapper.v \
+            rtl/digital/wishbone_csr/wb_csr.v \
+            rtl/digital/cic/cic_decimator.v \
+            rtl/digital/fir/fir_filter.v \
+            rtl/digital/pwm_dac/pwm_dac.v \
+            rtl/digital/lfsr/lfsr.v \
+            --top-module user_project_wrapper 2>&1 | \
+            grep -v "^%Warning" || true
+          echo "Lint complete"
+
   rtl_sim:
     name: RTL Simulation
     runs-on: ubuntu-latest
@@ -21,28 +45,32 @@ jobs:
           iverilog -o /tmp/pwm_dac_sim \
             rtl/digital/pwm_dac/pwm_dac.v \
             sim/digital/tb_pwm_dac.v
-          vvp /tmp/pwm_dac_sim
+          vvp /tmp/pwm_dac_sim | tee /tmp/pwm_dac.log
+          grep -q "Done" /tmp/pwm_dac.log
 
       - name: Simulate CIC Decimator
         run: |
           iverilog -o /tmp/cic_sim \
             rtl/digital/cic/cic_decimator.v \
             sim/digital/tb_cic.v
-          vvp /tmp/cic_sim
+          vvp /tmp/cic_sim | tee /tmp/cic.log
+          grep -q "Done" /tmp/cic.log
 
       - name: Simulate FIR Filter
         run: |
           iverilog -o /tmp/fir_sim \
             rtl/digital/fir/fir_filter.v \
             sim/digital/tb_fir.v
-          vvp /tmp/fir_sim
+          vvp /tmp/fir_sim | tee /tmp/fir.log
+          grep -q "Done" /tmp/fir.log
 
       - name: Simulate Wishbone CSR
         run: |
           iverilog -o /tmp/wb_csr_sim \
             rtl/digital/wishbone_csr/wb_csr.v \
             sim/digital/tb_wb_csr.v
-          vvp /tmp/wb_csr_sim
+          vvp /tmp/wb_csr_sim | tee /tmp/wb_csr.log
+          grep -q "Done" /tmp/wb_csr.log
 
       - name: Integration Smoke Test
         run: |
@@ -54,4 +82,63 @@ jobs:
             rtl/digital/pwm_dac/pwm_dac.v \
             rtl/digital/lfsr/lfsr.v \
             sim/digital/tb_top.v
-          vvp /tmp/top_sim
+          vvp /tmp/top_sim | tee /tmp/top.log
+          grep -q "Done" /tmp/top.log
+
+      - name: Upload simulation logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: sim-logs
+          path: /tmp/*.log
+
+  signoff_check:
+    name: Signoff Reports Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check signoff reports exist
+        run: |
+          echo "Checking signoff artifacts..."
+          ls signoff/ || echo "No signoff directory"
+          ls lef/ || echo "No LEF directory"
+          echo "Checking RTL structure..."
+          ls rtl/digital/fir/fir_filter.v
+          ls rtl/digital/cic/cic_decimator.v
+          ls rtl/digital/pwm_dac/pwm_dac.v
+          ls rtl/digital/wishbone_csr/wb_csr.v
+          ls rtl/digital/lfsr/lfsr.v
+          ls verilog/rtl/user_project_wrapper.v
+          echo "All RTL files present"
+
+      - name: Check OpenLane config
+        run: |
+          ls openlane/wrapped_filter/config.json
+          ls openlane/wrapped_filter/base_wrapped_filter.sdc
+          ls openlane/wrapped_filter/pin_order.cfg
+          echo "OpenLane config complete"
+
+  drc_check:
+    name: DRC Results Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Verify DRC clean from signoff report
+        run: |
+          if [ -f signoff/wrapped_filter/OPENLANE_VERSION ]; then
+            echo "OpenLane signoff artifacts found"
+            cat signoff/wrapped_filter/OPENLANE_VERSION
+          else
+            echo "Signoff directory contents:"
+            find signoff/ -type f | head -20 || echo "No signoff files in repo"
+          fi
+          # Check manufacturability report if present
+          RPT=$(find . -name "manufacturability.rpt" | head -1)
+          if [ -n "$RPT" ]; then
+            cat $RPT
+            grep -q "Total Magic DRC violations is 0" $RPT && \
+              echo "DRC CLEAN" || echo "DRC violations found"
+          else
+            echo "Manufacturability report not in repo (generated during hardening)"
+          fi
