@@ -1,6 +1,6 @@
 ###############################################################################
 # Created by write_sdc
-# Thu Mar 19 18:54:25 2026
+# Fri Mar 20 17:26:36 2026
 ###############################################################################
 current_design user_project_wrapper
 ###############################################################################
@@ -1007,6 +1007,25 @@ set_multicycle_path -setup\
 # Environment
 ###############################################################################
 set_load -pin_load 0.1900 [get_ports {wbs_ack_o}]
+set_load -pin_load 0.1900 [get_ports {analog_io[18]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[17]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[16]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[15]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[14]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[13]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[12]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[11]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[10]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[9]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[8]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[7]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[6]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[5]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[4]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[3]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[2]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[1]}]
+set_load -pin_load 0.1900 [get_ports {analog_io[0]}]
 set_load -pin_load 0.1900 [get_ports {io_oeb[37]}]
 set_load -pin_load 0.1900 [get_ports {io_oeb[36]}]
 set_load -pin_load 0.1900 [get_ports {io_oeb[35]}]

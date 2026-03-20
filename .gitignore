@@ -33,3 +33,4 @@ verilog/gl/user_project_wrapper.v
 sim/digital/*_sim
 sim/gl/*_sim
 fir_accel_breakout/
+venv-cocotb/
