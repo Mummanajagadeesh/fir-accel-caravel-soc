@@ -28,3 +28,4 @@ spi/
 sim/gl/gl_sim
 sim/gl/*.vcd
 verilog/gl/user_project_wrapper.v
+verilog/gl/user_project_wrapper.v
