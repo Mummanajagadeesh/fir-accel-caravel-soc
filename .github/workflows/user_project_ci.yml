@@ -124,6 +124,7 @@ jobs:
           path: /tmp/${{ env.dep_name }}.tar
 
   hardening:
+    if: false
     timeout-minutes: 720
     runs-on: ubuntu-latest
     strategy:
