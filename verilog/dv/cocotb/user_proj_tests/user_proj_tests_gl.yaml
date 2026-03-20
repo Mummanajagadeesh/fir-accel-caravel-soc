@@ -1,3 +1,4 @@
 # SPDX-FileCopyrightText: 2026 Mummana Jagadeesh
 # SPDX-License-Identifier: Apache-2.0
-- fir_wb
+Tests:
+    - {name: fir_wb, sim: GL}
