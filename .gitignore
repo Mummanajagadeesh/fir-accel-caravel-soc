@@ -25,4 +25,5 @@ mag/
 maglef/
 def/
 spi/
-verilog/gl/
+sim/gl/gl_sim
+sim/gl/*.vcd
