@@ -1,0 +1,11 @@
+{
+  "board": {},
+  "meta": {
+    "filename": "fir_accel_breakout.kicad_pro",
+    "version": 1
+  },
+  "schematic": {
+    "legacy_lib_dir": "",
+    "legacy_lib_list": []
+  }
+}
