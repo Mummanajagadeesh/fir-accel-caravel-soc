@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2020 Efabless Corporation
+# SPDX-License-Identifier: Apache-2.0
+
 CARAVEL_ROOT: /home/jagadeesh97/caravel_user_project/caravel
 MCW_ROOT: /home/jagadeesh97/caravel_user_project/mgmt_core_wrapper
 PDK: sky130A
