@@ -1,6 +1,14 @@
+// SPDX-FileCopyrightText: 2026 Mummana Jagadeesh
+// SPDX-License-Identifier: Apache-2.0
 `default_nettype none
 `ifndef MPRJ_IO_PADS
   `define MPRJ_IO_PADS 38
+`endif
+`ifndef MPRJ_IO_PADS_1
+  `define MPRJ_IO_PADS_1 19
+`endif
+`ifndef MPRJ_IO_PADS_2
+  `define MPRJ_IO_PADS_2 19
 `endif
 
 module user_project_wrapper #(
@@ -26,6 +34,8 @@ module user_project_wrapper #(
     input  wire [`MPRJ_IO_PADS-1:0] io_in,
     output wire [`MPRJ_IO_PADS-1:0] io_out,
     output wire [`MPRJ_IO_PADS-1:0] io_oeb,
+    inout  wire [`MPRJ_IO_PADS_1-1:0] analog_io,
+    input  wire         user_clock2,
     output wire [2:0]   user_irq
 );
 
@@ -46,10 +56,8 @@ module user_project_wrapper #(
 
     assign bit_in = use_lfsr ? lfsr_bit : io_in[8];
 
-    // --- GPIO assignments (flat, no generate) ---
-    // io_out: only [9] is driven, rest tied 0
+    // GPIO assignments
     assign io_out  = {{(`MPRJ_IO_PADS-10){1'b0}}, pwm_out, {9{1'b0}}};
-    // io_oeb: [9]=0 (output), rest=1 (input/hi-Z)
     assign io_oeb  = {{(`MPRJ_IO_PADS-10){1'b1}}, 1'b0, {9{1'b1}}};
 
     assign la_data_out = 128'b0;
