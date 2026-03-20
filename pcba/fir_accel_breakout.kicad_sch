@@ -1,3 +1,4 @@
+(kicad_sch_spdx "SPDX-FileCopyrightText: 2026 Mummana Jagadeesh" "SPDX-License-Identifier: Apache-2.0"
 (kicad_sch (version 20230121) (generator eeschema)
   (paper "A4")
   (title_block

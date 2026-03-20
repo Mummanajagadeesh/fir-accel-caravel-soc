@@ -32,3 +32,4 @@ verilog/gl/user_project_wrapper.v
 *.vcd
 sim/digital/*_sim
 sim/gl/*_sim
+fir_accel_breakout/

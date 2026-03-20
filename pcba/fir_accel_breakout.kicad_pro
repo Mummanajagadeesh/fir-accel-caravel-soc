@@ -7,5 +7,6 @@
   "schematic": {
     "legacy_lib_dir": "",
     "legacy_lib_list": []
-  }
+  },
+  "_spdx": "SPDX-FileCopyrightText: 2026 Mummana Jagadeesh\nSPDX-License-Identifier: Apache-2.0"
 }
