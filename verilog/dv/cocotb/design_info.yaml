@@ -9,9 +9,3 @@ caravan: false
 clk: 25
 emailto:
 - null
-extra_design_files:
-- $GITHUB_WORKSPACE/rtl/digital/wishbone_csr/wb_csr.v
-- $GITHUB_WORKSPACE/rtl/digital/cic/cic_decimator.v
-- $GITHUB_WORKSPACE/rtl/digital/fir/fir_filter.v
-- $GITHUB_WORKSPACE/rtl/digital/pwm_dac/pwm_dac.v
-- $GITHUB_WORKSPACE/rtl/digital/lfsr/lfsr.v
