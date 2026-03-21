@@ -15,7 +15,6 @@
     "CLOCK_NET": "wb_clk_i",
     "BASE_SDC_FILE": "dir::base_wrapped_filter.sdc",
     "FP_SIZING": "absolute",
-    "DIE_AREA": "0 0 2800 1760",
     "FP_PIN_ORDER_CFG": "dir::pin_order.cfg",
     "FP_CORE_UTIL": 35,
     "PL_TARGET_DENSITY": 0.4,
@@ -32,14 +31,20 @@
     "SYNTH_BUFFERING": 0,
     "IO_SYNC": 0,
     "RUN_CVC": 1,
-    "VDD_NETS": ["vccd1"],
-    "GND_NETS": ["vssd1"],
+    "VDD_NETS": [
+        "vccd1"
+    ],
+    "GND_NETS": [
+        "vssd1"
+    ],
     "SYNTH_USE_PG_PINS_DEFINES": "USE_POWER_PINS",
     "pdk::sky130*": {
         "FP_CORE_UTIL": 35,
         "RT_MAX_LAYER": "met4",
         "scl::sky130_fd_sc_hd": {
             "CLOCK_PERIOD": 25
-        }
+        },
+        "DIE_AREA": "0 0 2920 3520",
+        "FP_DEF_TEMPLATE": "dir::../../openlane/user_project_wrapper/fixed_dont_change/user_project_wrapper.def"
     }
 }

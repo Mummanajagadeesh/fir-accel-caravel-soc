@@ -34,3 +34,6 @@ sim/digital/*_sim
 sim/gl/*_sim
 fir_accel_breakout/
 venv-cocotb/
+sim/local_test*/
+sim/hex_files/
+sim/local_test2*/
